@@ -1,9 +1,7 @@
-function ShipFactory(length) {
-    const hits = 0;
-
+export default function ShipFactory(length) {
     const ship = {
         length,
-        hits,  
+        hits: 0, 
         hit() {
             this.hits++
         },
@@ -14,5 +12,3 @@ function ShipFactory(length) {
 
     return ship;
 }
-
-module.exports = ShipFactory;

@@ -1,4 +1,4 @@
-const ShipFactory = require("../components/ship");
+import ShipFactory from "../components/ship"
 
 describe("Creating a new ship", () => {
     const ship = ShipFactory(5)
