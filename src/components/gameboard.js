@@ -16,7 +16,7 @@ function GameboardFactory() {
         return board
     }
 
-    function checkForLegalMove(ship, coords, direction) {
+    function checkForLegalMove(ship, coords, horizontal, board) {
         /*
             If empty {
 
@@ -25,13 +25,28 @@ function GameboardFactory() {
             } if off-vertically
 
         */
-        throw new IllegalMove("Illegal move: The ship must be entirely on the board");
+        validateMoveIsOnBoard(ship, coords);
+               
+        // throw new IllegalMove("Illegal move: The ship must be entirely on the board");
+    }
+
+    function validateMoveIsOnBoard(ship, coords) {
+        if (
+            coords[0]+ship.length > 9 ||
+            coords[1]+ship.length > 9
+        ) {
+            throw new IllegalMove("Illegal Move: The ship must be entirely on the board")
+        }
+    }
+
+    function validateOverlap(coords, ships) {
+
     }
     
     const gameboard = {
         board: buildBoard(),
         placeShip (ship, coords, horizontal = true) {
-            checkForLegalMove(ship, coords, horizontal)
+            checkForLegalMove(ship, coords, horizontal, this.board)
 
             if (horizontal) {
                 for (let i = coords[1]; i < ship.length; i++) {
