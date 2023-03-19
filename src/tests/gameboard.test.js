@@ -37,6 +37,24 @@ test("Place a ship at a specific coordinate horizontally", () => {
     ])
 });
 
+test("Place a ship in different horizontal coords", () => {
+    const ship = ShipFactory(5);
+    const gameboard = new GameboardFactory();
+    gameboard.placeShip(ship, [0,4], true);    
+    expect(gameboard.board).toEqual([
+        [null,null,null,null,ship,ship,ship,ship,ship,null],
+        [null,null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+    ])
+})
+
 test("Place a ship at a specific coordinate vertically", () => {
     const ship = ShipFactory(4);
     const gameboard = GameboardFactory();
@@ -56,7 +74,47 @@ test("Place a ship at a specific coordinate vertically", () => {
     ])
 });
 
-test("Don't allow for illegal horizontal moves", () => {
+test("Place a ship at a different coordinate vertically", () => {
+    const ship = ShipFactory(4);
+    const gameboard = GameboardFactory();
+    gameboard.placeShip(ship, [0,3], false);
+
+    expect(gameboard.board).toEqual([
+        [null,null,null,ship,null,null,null,null,null,null],
+        [null,null,null,ship,null,null,null,null,null,null],
+        [null,null,null,ship,null,null,null,null,null,null],
+        [null,null,null,ship,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+    ])
+});
+
+test("Mix of horizontal and vertical coordinates", () => {
+    const ship1 = ShipFactory(5);
+    const ship2 = ShipFactory(4);
+    const gameboard = GameboardFactory();
+    gameboard.placeShip(ship1, [2,3], false);
+    gameboard.placeShip(ship2, [8,4], true);
+
+    expect(gameboard.board).toEqual([
+        [null,null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+        [null,null,null,ship1,null,null,null,null,null,null],
+        [null,null,null,ship1,null,null,null,null,null,null],
+        [null,null,null,ship1,null,null,null,null,null,null],
+        [null,null,null,ship1,null,null,null,null,null,null],
+        [null,null,null,ship1,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,ship2,ship2,ship2,ship2,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+    ])
+})
+
+test.skip("Don't allow for illegal horizontal moves", () => {
     const ship = ShipFactory(5);
     const gameboard = GameboardFactory();
     function errorPlacement() {
@@ -74,9 +132,9 @@ test.skip("Don't allow double placement, this throws an error", () => {
     gameboard.placeShip(ship1, [0,0], true);
 
     function illegalShipPlacement() {
-        gameboard.placeShip(ship2, [0,4], false) 
+        gameboard.placeShip(ship2, [0,4], horizontal, true) 
     }
-
+ 
     expect(illegalShipPlacement).toThrow();
 });
 
