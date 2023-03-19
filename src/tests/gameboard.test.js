@@ -54,4 +54,15 @@ test("Place a ship at a specific coordinate vertically", () => {
         [null,null,null,null,null,null,null,null,null,null],
         [null,null,null,null,null,null,null,null,null,null],
     ])
+});
+
+test("Don't allow for illegal horizontal moves", () => {
+    const ship = ShipFactory(5);
+    const gameboard = GameboardFactory();
+    function errorPlacement() {
+        gameboard.placeShip(ship, [6,0], true)
+    }
+    // gameboard.placeShip(ship, [6,0], true);
+
+    expect(errorPlacement).toThrow();
 })

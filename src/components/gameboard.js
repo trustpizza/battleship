@@ -1,3 +1,8 @@
+function IllegalMove(message) {
+    this.message = message;
+    this.name = "IllegalMove";
+}
+
 function GameboardFactory() {
     function buildBoard() {
         const board = [];
@@ -10,10 +15,24 @@ function GameboardFactory() {
         }   
         return board
     }
+
+    function checkForLegalMove(ship, coords, direction) {
+        /*
+            If empty {
+
+            } if off- horizontally {
+
+            } if off-vertically
+
+        */
+        throw new IllegalMove("Illegal move: The ship must be entirely on the board");
+    }
     
     const gameboard = {
         board: buildBoard(),
         placeShip (ship, coords, horizontal = true) {
+            checkForLegalMove(ship, coords, horizontal)
+
             if (horizontal) {
                 for (let i = coords[1]; i < ship.length; i++) {
                     this.board[coords[0]][i] = ship             
@@ -22,9 +41,7 @@ function GameboardFactory() {
                 for (let i = coords[0]; i < ship.length; i++) {
                     this.board[i][coords[1]] = ship
                 }
-            } else {
-                throw new Error("Ships must be either veritically or horizontally placed")
-            }
+            } 
         },
     }
 
