@@ -20,7 +20,7 @@ test("Gameboard has a board: 1- arrays of 10 arrays of 10 nulls", () => {
 
 test("Place a ship at a specific coordinate horizontally", () => {
     const ship = ShipFactory(5);
-    const gameboard = GameboardFactory();
+    const gameboard = new GameboardFactory();
     gameboard.placeShip(ship, [0,0], true);    
 
     expect(gameboard.board).toEqual([

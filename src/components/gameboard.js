@@ -1,4 +1,4 @@
-export default function GameboardFactory() {
+function GameboardFactory() {
     function buildBoard() {
         const board = [];
         for (let i = 0; i < 10; i++) {
@@ -10,10 +10,10 @@ export default function GameboardFactory() {
         }   
         return board
     }
-
+    
     const gameboard = {
         board: buildBoard(),
-        placeShip(ship, coords, horizontal = true) {
+        placeShip (ship, coords, horizontal = true) {
             if (horizontal) {
                 for (let i = coords[1]; i < ship.length; i++) {
                     this.board[coords[0]][i] = ship             
@@ -26,10 +26,9 @@ export default function GameboardFactory() {
                 throw new Error("Ships must be either veritically or horizontally placed")
             }
         },
-    };
-
-    // Object.assign(gameboard.prototype)
+    }
 
     return gameboard
 };
 
+export default GameboardFactory;
