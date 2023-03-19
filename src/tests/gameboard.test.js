@@ -147,3 +147,36 @@ test("Don't allow for vertical moves that place a ship off of the board", () => 
 
     expect(errorPlacement).toThrow()
 })
+
+test("Attacking an empty spot returns False", () => {
+    const gameboard = GameboardFactory();
+    
+    expect(gameboard.attack([0,0])).toBe(false);
+})
+
+test("Attacks must be made with valid values", () => {
+    const gameboard = GameboardFactory();
+    function badAttack() {
+        gameboard.attack([10,10]);
+    }
+
+    expect(badAttack).toThrow();
+});
+
+test("Attacking an enemy spot that is NOT empty returns TRUE", () => {
+    const gameboard = GameboardFactory();
+    const ship = ShipFactory(5);
+    gameboard.placeShip(ship, [0,0], true)
+    
+    expect(gameboard.attack([0,2])).toBe(true)
+});
+
+test("You are able to return a list of hits that updates", () => {
+    const gameboard = GameboardFactory();
+    const ship = ShipFactory(5);
+    gameboard.placeShip(ship, [0,0], true);
+
+    expect(gameboard.hits).toBe([]);
+    gameboard.attack([0,2]);
+    expect(gameboard.hits).toBe([[0,2]])
+})

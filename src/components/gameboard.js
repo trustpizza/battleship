@@ -3,6 +3,11 @@ function IllegalMove(message) {
     this.name = "IllegalMove";
 }
 
+function IllegalAttack(message) {
+    this.message = message;
+    this.name = "IllegalAttack"
+}
+
 function GameboardFactory() {
     function buildBoard() {
         const board = [];
