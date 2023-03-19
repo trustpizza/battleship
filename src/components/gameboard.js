@@ -12,8 +12,8 @@ function GameboardFactory() {
     function buildBoard() {
         const board = [];
         for (let i = 0; i < 10; i++) {
-            let row = [];
-            for (let i = 0; i < 10; i++) {
+            const row = [];
+            for (let j = 0; j < 10; j++) {
                 row.push(null)                
             }
             board.push(row);
