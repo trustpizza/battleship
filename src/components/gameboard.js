@@ -19,7 +19,9 @@ export default function GameboardFactory() {
                     this.board[coords[0]][i] = ship             
                 }
             } else if (!horizontal) {
-
+                for (let i = coords[0]; i < ship.length; i++) {
+                    this.board[i][coords[1]] = ship
+                }
             } else {
                 throw new Error("Ships must be either veritically or horizontally placed")
             }
