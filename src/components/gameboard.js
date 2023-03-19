@@ -1,21 +1,27 @@
 export default function GameboardFactory() {
+    function buildBoard() {
+        const board = [];
+        for (let i = 0; i < 10; i++) {
+            let row = [];
+            for (let i = 0; i < 10; i++) {
+                row.push(null)                
+            }
+            board.push(row);
+        }   
+        return board
+    }
+
     const gameboard = {
-        board: new Array(10).fill(new Array(10).fill(null)),
-        placeShip(ship, start, end) {
-            if (start[0] === end[0]) { // Ship is horizontal
-                const row = start[0]
-        
-                for (let i = 0; i < ship.length; i++) {
-                    this.board[row][i] = ship
+        board: buildBoard(),
+        placeShip(ship, coords, horizontal = true) {
+            if (horizontal) {
+                for (let i = coords[1]; i < ship.length; i++) {
+                    this.board[coords[0]][i] = ship             
                 }
-            } else if (start[1] === end[1]) { // Ship is vertical
-                const col = start[1];
-        
-                for (let i = 0; i < ship.length; i++) {
-                    this.board[i][col] = ship
-                }   
+            } else if (!horizontal) {
+
             } else {
-                return new Error("Ships must be either veritically or horizontally placed")
+                throw new Error("Ships must be either veritically or horizontally placed")
             }
         },
     };

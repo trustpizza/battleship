@@ -110,13 +110,33 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 /***/ }),
 
+/***/ "./src/components/gameboard.js":
+/*!*************************************!*\
+  !*** ./src/components/gameboard.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ GameboardFactory)\n/* harmony export */ });\nfunction GameboardFactory() {\n    const gameboard = {\n        board: new Array(10).fill(new Array(10).fill(null)),\n        placeShip(ship, coords, horizontal = true) {\n            if (horizontal) {\n                for (let i = coords[1]; i < ship.length; i++) {\n                    this.board[coords[i]][coords[1]] = ship             \n                }\n            } else if (!horizontal) {\n\n            } else {\n                throw new Error(\"Ships must be either veritically or horizontally placed\")\n            }\n        },\n    };\n\n    // Object.assign(gameboard.prototype)\n\n    return gameboard\n};\n\n\n\n//# sourceURL=webpack://battleship/./src/components/gameboard.js?");
+
+/***/ }),
+
+/***/ "./src/components/ship.js":
+/*!********************************!*\
+  !*** ./src/components/ship.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ ShipFactory)\n/* harmony export */ });\nfunction ShipFactory(length) {\n    const ship = {\n        length,\n        hits: 0, \n        hit() {\n            this.hits++\n        },\n        isSunk() {\n            return this.hits === this.length\n        }\n    };\n\n    return ship;\n}\n\n\n//# sourceURL=webpack://battleship/./src/components/ship.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\n\n\n//# sourceURL=webpack://battleship/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _components_gameboard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/gameboard */ \"./src/components/gameboard.js\");\n/* harmony import */ var _components_ship__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/ship */ \"./src/components/ship.js\");\n\n\n\n\n//# sourceURL=webpack://battleship/./src/index.js?");
 
 /***/ })
 

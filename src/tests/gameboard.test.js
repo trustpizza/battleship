@@ -18,17 +18,18 @@ test("Gameboard has a board: 1- arrays of 10 arrays of 10 nulls", () => {
     ])
 })
 
-test("Place a ship at a specific coordinate", () => {
+test("Place a ship at a specific coordinate horizontally", () => {
     const ship = ShipFactory(5);
+    // const ship = 1;
     const gameboard = GameboardFactory();
-    gameboard.placeShip(ship, [0,0], [0,4]);    
+    gameboard.placeShip(ship, [0,0], true);    
 
     expect(gameboard.board).toEqual([
-        [ship,null,null,null,null,null,null,null,null,null],
-        [ship,null,null,null,null,null,null,null,null,null],
-        [ship,null,null,null,null,null,null,null,null,null],
-        [ship,null,null,null,null,null,null,null,null,null],
-        [ship,null,null,null,null,null,null,null,null,null],
+        [ship,ship,ship,ship,ship,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null,null],
         [null,null,null,null,null,null,null,null,null,null],
         [null,null,null,null,null,null,null,null,null,null],
         [null,null,null,null,null,null,null,null,null,null],
