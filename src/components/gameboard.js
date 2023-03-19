@@ -60,7 +60,17 @@ function GameboardFactory() {
         }
         // Check each of the futurePosition on the board, if they are not null, return error
     }
-    
+
+    function checkForLegalAttack(coords, board) {
+        validateEmptySpace(coords, board)
+    };
+
+    function validateEmptySpace(coords, board) {
+        if (board[coords[0]][coords[1]]) {
+            throw new IllegalAttack("You ")
+        }
+    }
+     
     const gameboard = {
         board: buildBoard(),
         placeShip (ship, coords, horizontal) {
@@ -76,6 +86,12 @@ function GameboardFactory() {
                 }
             } 
         },
+        attack (coords) { // Returns a boolean t/f for if the space hits a ship
+            // checkForLegalAttack(coords, this.board);
+            if (this.board[coords[0]][coords[1]]) return true;
+            return false;
+        },
+        hits: [],
     }
 
     return gameboard

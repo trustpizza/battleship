@@ -156,20 +156,20 @@ describe("Ship Placement", () => {
     })
 })
 
-describe.skip("Attacking Ships", () => {
+describe("Attacking Ships", () => {
     describe("Legal Attacks", () => {
-        test("Attacking an empty spot returns False", () => {
+        test("Attacking and missing returns false", () => {
             const gameboard = GameboardFactory();
             
             expect(gameboard.attack([0,0])).toBe(false);
         });
 
-        test.skip("Attacking an enemy spot that is NOT empty returns TRUE", () => {
+        test("Attacking and hitting returns true", () => {
             const gameboard = GameboardFactory();
             const ship = ShipFactory(5);
-            gameboard.placeShip(ship, [0,0], true)
-            
-            expect(gameboard.attack([0,2])).toBe(true)
+            gameboard.placeShip(ship, [0,0], true);
+        
+            expect(gameboard.attack([0,2])).toBe(true);
         });
     });
 
@@ -182,13 +182,13 @@ describe.skip("Attacking Ships", () => {
             expect(gameboard.hits).toBe([]);
         })
     
-        test("After attacking, the list of attacks is updated", () => {
+        test.skip("After attacking, the list of attacks is updated", () => {
             gameboard.attack([0,2]);
             expect(gameboard.hits).toBe([[0,2]])
         })
     });
 
-    describe("Illegal Attacks", () => {
+    describe.skip("Illegal Attacks", () => {
         test.skip("Attack is not a board location", () => {
             const gameboard = GameboardFactory();
             function badAttack() {
