@@ -114,7 +114,7 @@ test("Mix of horizontal and vertical coordinates", () => {
     ])
 })
 
-test.skip("Don't allow for illegal horizontal moves", () => {
+test("Don't allow for illegal horizontal moves", () => {
     const ship = ShipFactory(5);
     const gameboard = GameboardFactory();
     function errorPlacement() {
@@ -125,20 +125,20 @@ test.skip("Don't allow for illegal horizontal moves", () => {
     expect(errorPlacement).toThrow();
 });
 
-test.skip("Don't allow double placement, this throws an error", () => {
+test("Don't allow double placement, this throws an error", () => {
     const ship1 = ShipFactory(5);
     const ship2 = ShipFactory(4);
     const gameboard = GameboardFactory()
     gameboard.placeShip(ship1, [0,0], true);
 
     function illegalShipPlacement() {
-        gameboard.placeShip(ship2, [0,4], horizontal, true) 
+        gameboard.placeShip(ship2, [0,4], true) 
     }
  
     expect(illegalShipPlacement).toThrow();
 });
 
-test.skip("Don't allow for vertical moves that place a ship off of the board", () => {
+test("Don't allow for vertical moves that place a ship off of the board", () => {
     const ship = ShipFactory(5);
     const gameboard = GameboardFactory();
     function errorPlacement() {
