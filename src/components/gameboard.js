@@ -1,11 +1,15 @@
-function IllegalMove(message) {
-    this.message = message;
-    this.name = "IllegalMove";
+class IllegalMove extends Error {
+    constructor(message) {
+        super(message)
+        this.name = "IllegalMove";
+    }
 }
 
-function IllegalAttack(message) {
-    this.message = message;
-    this.name = "IllegalAttack"
+class IllegalAttack extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "IllegalAttack";
+    }
 }
 
 function GameboardFactory() {
@@ -69,15 +73,16 @@ function GameboardFactory() {
     function validateNonRepeatAttack(coords, hits) {
         // Super silly workaround since this doesn't work normally with nested arrays
         if (JSON.stringify(hits).includes(JSON.stringify(coords))) {throw new IllegalAttack("Illegal Attack: You have already selected that move")}
-    }
-    
+    };
     
     function validateCoordIsOnBoard(coord) {
         if (coord[0] < 0 || coord[0] > 9
             || coord[1] < 0 || coord[1] > 9) {
                 throw new IllegalAttack("Illegal Attack: Moves must be between spaces 1 and 10")
             }
-    }
+    };
+
+    
      
     const gameboard = {
         board: buildBoard(),
