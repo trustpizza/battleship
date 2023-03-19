@@ -61,14 +61,22 @@ function GameboardFactory() {
         // Check each of the futurePosition on the board, if they are not null, return error
     }
 
-    function checkForLegalAttack(coords, board) {
-        validateEmptySpace(coords, board)
+    function checkForLegalAttack(coords, hits) {
+        validateCoordIsOnBoard(coords);
+        validateNonRepeatAttack(coords, hits);
     };
 
-    function validateEmptySpace(coords, board) {
-        if (board[coords[0]][coords[1]]) {
-            throw new IllegalAttack("You ")
-        }
+    function validateNonRepeatAttack(coords, hits) {
+        // Super silly workaround since this doesn't work normally with nested arrays
+        if (JSON.stringify(hits).includes(JSON.stringify(coords))) {throw new IllegalAttack("Illegal Attack: You have already selected that move")}
+    }
+    
+    
+    function validateCoordIsOnBoard(coord) {
+        if (coord[0] < 0 || coord[0] > 9
+            || coord[1] < 0 || coord[1] > 9) {
+                throw new IllegalAttack("Illegal Attack: Moves must be between spaces 1 and 10")
+            }
     }
      
     const gameboard = {
@@ -86,12 +94,13 @@ function GameboardFactory() {
                 }
             } 
         },
-        attack (coords) { // Returns a boolean t/f for if the space hits a ship
-            // checkForLegalAttack(coords, this.board);
+        hits: [],
+        receiveAttack (coords) { // Returns a boolean t/f for if the space hits a ship
+            checkForLegalAttack(coords, this.hits);
+            this.hits.push(coords)
             if (this.board[coords[0]][coords[1]]) return true;
             return false;
         },
-        hits: [],
     }
 
     return gameboard

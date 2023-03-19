@@ -161,7 +161,7 @@ describe("Attacking Ships", () => {
         test("Attacking and missing returns false", () => {
             const gameboard = GameboardFactory();
             
-            expect(gameboard.attack([0,0])).toBe(false);
+            expect(gameboard.receiveAttack([0,0])).toBe(false);
         });
 
         test("Attacking and hitting returns true", () => {
@@ -169,7 +169,7 @@ describe("Attacking Ships", () => {
             const ship = ShipFactory(5);
             gameboard.placeShip(ship, [0,0], true);
         
-            expect(gameboard.attack([0,2])).toBe(true);
+            expect(gameboard.receiveAttack([0,2])).toBe(true);
         });
     });
 
@@ -179,33 +179,33 @@ describe("Attacking Ships", () => {
         gameboard.placeShip(ship, [0,0], true);
     
         test("Originally hits is empty", () => {
-            expect(gameboard.hits).toBe([]);
+            expect(gameboard.hits).toEqual([]);
         })
     
-        test.skip("After attacking, the list of attacks is updated", () => {
-            gameboard.attack([0,2]);
-            expect(gameboard.hits).toBe([[0,2]])
+        test("After attacking, the list of attacks is updated", () => {
+            gameboard.receiveAttack([0,2]);
+            expect(gameboard.hits).toContainEqual([0,2])
         })
     });
 
-    describe.skip("Illegal Attacks", () => {
-        test.skip("Attack is not a board location", () => {
+    describe("Illegal Attacks", () => {
+        test("Attack is not a board location", () => {
             const gameboard = GameboardFactory();
             function badAttack() {
-                gameboard.attack([10,10]);
+                gameboard.receiveAttack([10,10]);
             }
-        
+
             expect(badAttack).toThrow();
         });
 
-        test.skip("Cannot repeat attack", () => {
+        test("Cannot repeat attack", () => {
             const gameboard = GameboardFactory();
             const ship = ShipFactory(5);
             gameboard.placeShip(ship, [0,0], true);
-            gameboard.attack([0,2]);
+            gameboard.receiveAttack([0,2]);
             
             function repeatAttack() {
-                gameboard.attack([0,2]);
+                gameboard.receiveAttack([0,2]);
             };
 
             expect(repeatAttack).toThrow();
