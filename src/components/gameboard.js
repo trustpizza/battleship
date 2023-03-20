@@ -113,7 +113,7 @@ function GameboardFactory() {
             checkForLegalAttack(coords, this.hits);
             this.hits.push(coords)
             if (this.board[coords[0]][coords[1]]) { 
-                this.board[coords[0]][coords[1]].hit()
+                this.board[coords[0]][coords[1]].hit();
                 return true 
             };
             return false;
