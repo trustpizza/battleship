@@ -7,7 +7,7 @@
     "dev": "webpack serve",
     "build": "webpack",
     "test": "jest",
-    "clean": "eslint src/* --fix && eslint-config-prettier src/*"
+    "clean": "echo 'Cleaned' && eslint src/components/* --fix && eslint-config-prettier src/components/* --write"
   },
   "repository": {
     "type": "git",

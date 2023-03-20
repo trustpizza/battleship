@@ -114,14 +114,14 @@ function GameboardFactory() {
         allSunk () {
             if (ships.length === 0) {
                 return "false"
-            } else {
+            } 
                 const val = ships.every((ship) => {
                     if (ship.isSunk()) {
                         return true
                     }
                 });
                 return val
-            }
+            
         }
     }
 
