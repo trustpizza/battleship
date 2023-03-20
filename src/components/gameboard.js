@@ -31,6 +31,7 @@ function GameboardFactory() {
     }
     
     function validateMoveIsOnBoard(ship, coords, horizontal) {
+        // THe -1 found in both of these are due to the fact that when placing a ship we do not count the start point.  For example, if a ship is 2 units long and placed on square [8,8], it will take up [8,8] and [8,9], however if we only added the ship length to its starting position this would give 8+2=10, and would then throw. 
         if (horizontal) {
             if (coords[1] + ship.length - 1 > 9 || coords[1] < 0) {
                 throw new IllegalMove("Illegal Move: The ship must be entirely on the board")
