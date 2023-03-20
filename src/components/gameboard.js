@@ -87,9 +87,9 @@ function GameboardFactory() {
 
     function verifyAllShipsSunk() {
         if (ships.length === 0) { return false; } 
-        // else if (ships.every((ship) =>
-        //     ship.isSunk()
-        // )) { return true }
+        else if (ships.every((ship) =>
+            ship.isSunk()
+        )) { return true }
     }
      
     const gameboard = {
@@ -112,7 +112,10 @@ function GameboardFactory() {
         receiveAttack (coords) { // Returns a boolean t/f for if the space hits a ship
             checkForLegalAttack(coords, this.hits);
             this.hits.push(coords)
-            if (this.board[coords[0]][coords[1]]) return true;
+            if (this.board[coords[0]][coords[1]]) { 
+                this.board[coords[0]][coords[1]].hit()
+                return true 
+            };
             return false;
         },
         allSunk: verifyAllShipsSunk()

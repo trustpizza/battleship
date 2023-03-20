@@ -220,13 +220,56 @@ describe("Sinking Ships", () => {
         expect(gameboard.allSunk).toBe(false);
     })
 
-    describe.skip("Placing 1 ship gameplay", () => {
+    describe("Placing 1 ship gameplay", () => {
         const gameboard = GameboardFactory();
         const ship = ShipFactory(3);
-        gameboard.placeShip(ship, [0,0], true);
 
         test("Originally allSunk is false", () => {
-            expect(gameboard.allSunk)
+            expect(gameboard.allSunk).toEqual(false)
+        })
+
+        describe("Ship shot once", () => {
+            gameboard.receiveAttack([0,0]);
+
+            test("Ships still not sunk", () => {  
+                expect(gameboard.allSunk).toEqual(false);
+            });
+
+            test("Ship has been hit once", () => {
+                expect(ship.hits).toEqual(1)
+            })
+        })
+
+        describe.skip("Ship shot twice", () => {
+            gameboard.receiveAttack([0,1]);
+
+            test("Ships still not sunk", () => {
+                expect(gameboard.allSunk).toEqual(false);
+            });
+
+            test.skip("Ship has been hit twice", () => {
+                expect(ship.hits).toEqual(2)
+            })
+        })
+
+        // gameboard.receiveAttack([0,0]);
+
+
+   
+
+
+
+        
+        test.skip("Ship is sunk now", () => {
+            gameboard.receiveAttack([0,0]);
+            gameboard.receiveAttack([0,1]);
+            gameboard.receiveAttack([0,2]);
+
+            expect(ship.isSunk()).toBe(true)
+        })
+
+        test.skip("Ship attacked ship.length times sinks the ship and all ships", () => {
+            expect(gameboard.allSunk).toEqual(true)
         })
     }); 
 
