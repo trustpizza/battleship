@@ -1,8 +1,10 @@
 export default function PlayerFactory(name, gameboard) {
+    const board = gameboard;
+
     const player = {
         name,
         takeTurn (coords) {
-            return gameboard.receiveAttack(coords);
+            return board.receiveAttack(coords);
         },
     }
 
