@@ -1,7 +1,7 @@
 import GameboardFactory from "../components/gameboard";
 import ShipFactory from "../components/ship"
 
-describe.skip("Board Creation", () => {
+describe("Board Creation", () => {
     test("Gameboard has a board: 1- arrays of 10 arrays of 10 nulls", () => {
         const gameboard = GameboardFactory();
     
@@ -20,7 +20,7 @@ describe.skip("Board Creation", () => {
     })
 })
 
-describe.skip("Ship Placement", () => {
+describe("Ship Placement", () => {
     describe("Legal Placements", () => {
         test("Place a ship at a specific coordinate horizontally", () => {
             const ship = ShipFactory(5);
@@ -156,7 +156,7 @@ describe.skip("Ship Placement", () => {
     })
 })
 
-describe.skip("Attacking Ships", () => {
+describe("Attacking Ships", () => {
     describe("Legal Attacks", () => {
         test("Attacking and missing returns false", () => {
             const gameboard = GameboardFactory();
@@ -217,13 +217,20 @@ describe("Sinking Ships", () => {
     test("Without any ships placed, no ships are sunk", () => {
         const gameboard = GameboardFactory();
 
-        expect(gameboard.allSunk).toBe(false);
+        expect(gameboard.allSunk()).toBe("false");
     })
 
     describe("Placing 1 ship gameplay", () => {
-        // test.skip("Originally allSunk is false", () => {
-        //     expect(gameboard.allSunk).toEqual(false)
-        // })
+        describe("New Board", () => {
+            const gameboard = GameboardFactory();
+            const ship = ShipFactory(3);
+            gameboard.placeShip(ship, [0,0], true);
+
+            test("Originally allSunk is false", () => {
+                expect(gameboard.allSunk()).toEqual(false)
+            })
+        })
+
 
         describe("Ship shot once", () => {
             const gameboard = GameboardFactory();
@@ -232,7 +239,7 @@ describe("Sinking Ships", () => {
             gameboard.receiveAttack([0,0]);
 
             test("Ships still not sunk", () => {  
-                expect(gameboard.allSunk).toEqual(false);
+                expect(gameboard.allSunk()).toEqual(false);
             });
 
             test("Ship has been hit once", () => {
@@ -248,7 +255,7 @@ describe("Sinking Ships", () => {
             gameboard.receiveAttack([0,1]);
 
             test("Ships still not sunk", () => {
-                expect(gameboard.allSunk).toEqual(false);
+                expect(gameboard.allSunk()).toEqual(false);
             });
 
             test("Ship has been hit twice", () => {
@@ -269,15 +276,55 @@ describe("Sinking Ships", () => {
             })
     
             test("Ship attacked ship.length times sinks the ship and all ships", () => {
-                expect(gameboard.allSunk).toEqual(true)
+                expect(gameboard.allSunk()).toEqual(true)
             })
         })
 
     }); 
 
-    describe.skip("Placing 2 ships gameplay", () => {
-        const gameboard = GameboardFactory();
+    describe("Placing 2 ships gameplay", () => {
+        describe("Sinking first ship", () => {
+            const gameboard = GameboardFactory();
+            const ship1 = ShipFactory(2);
+            const ship2 = ShipFactory(4);
+            gameboard.placeShip(ship1, [0,0], true);
+            gameboard.placeShip(ship2, [1,0], true);
 
+            test("Board does not say all sunk", () => {
+                expect(gameboard.allSunk()).toBe(false)
+            })
+
+            test("Sink > Not All Sunk", () => {
+                gameboard.receiveAttack([0,0]);
+                gameboard.receiveAttack([0,1]);
+                
+                expect(gameboard.allSunk()).toBe(false);
+            });
+
+            test("Ship1 is sunk", () => {
+                expect(ship1.isSunk()).toBe(true)
+            })
+        })
+
+        describe("Sinking both ships", () => {
+            const gameboard = GameboardFactory();
+            const ship1 = ShipFactory(2);
+            const ship2 = ShipFactory(4);
+            gameboard.placeShip(ship1, [0,0], true);
+            gameboard.placeShip(ship2, [1,0], true);
+
+            test("All boats sunk = true", () => {
+                gameboard.receiveAttack([0,0]);
+                gameboard.receiveAttack([0,1]);
+
+                gameboard.receiveAttack([1,0]);
+                gameboard.receiveAttack([1,1]);
+                gameboard.receiveAttack([1,2]);
+                gameboard.receiveAttack([1,3]);
+
+                expect(gameboard.allSunk()).toBe(true)
+            })
+        })
     })
 })
 

@@ -83,14 +83,7 @@ function GameboardFactory() {
             }
     };
 
-    const ships = []
-
-    function verifyAllShipsSunk() {
-        if (ships.length === 0) { return false; } 
-        else if (ships.every((ship) =>
-            ship.isSunk()
-        )) { return true }
-    }
+    const ships = [];
      
     const gameboard = {
         board: buildBoard(),
@@ -99,14 +92,14 @@ function GameboardFactory() {
 
             if (horizontal) {
                 for (let i = coords[1]; i < coords[1]+ship.length; i++) {
-                    this.board[coords[0]][i] = ship             
+                    this.board[coords[0]][i] = ship;             
                 }
             } else if (!horizontal) {
                 for (let i = coords[0]; i < coords[0]+ship.length; i++) {
-                    this.board[i][coords[1]] = ship
+                    this.board[i][coords[1]] = ship;
                 }
             } 
-            ships.push(ship)
+            ships.push(ship);
         },
         hits: [],
         receiveAttack (coords) { // Returns a boolean t/f for if the space hits a ship
@@ -114,14 +107,25 @@ function GameboardFactory() {
             this.hits.push(coords)
             if (this.board[coords[0]][coords[1]]) { 
                 this.board[coords[0]][coords[1]].hit();
-                return true 
+                return true; 
             };
             return false;
         },
-        allSunk: verifyAllShipsSunk()
+        allSunk () {
+            if (ships.length === 0) {
+                return "false"
+            } else {
+                const val = ships.every((ship) => {
+                    if (ship.isSunk()) {
+                        return true
+                    }
+                });
+                return val
+            }
+        }
     }
 
-    return gameboard
+    return gameboard;
 };
 
 export default GameboardFactory;
