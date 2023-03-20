@@ -83,7 +83,14 @@ function GameboardFactory() {
             }
     };
 
-    
+    const ships = []
+
+    function verifyAllShipsSunk() {
+        if (ships.length === 0) { return false; } 
+        // else if (ships.every((ship) =>
+        //     ship.isSunk()
+        // )) { return true }
+    }
      
     const gameboard = {
         board: buildBoard(),
@@ -99,6 +106,7 @@ function GameboardFactory() {
                     this.board[i][coords[1]] = ship
                 }
             } 
+            ships.push(ship)
         },
         hits: [],
         receiveAttack (coords) { // Returns a boolean t/f for if the space hits a ship
@@ -107,6 +115,7 @@ function GameboardFactory() {
             if (this.board[coords[0]][coords[1]]) return true;
             return false;
         },
+        allSunk: verifyAllShipsSunk()
     }
 
     return gameboard

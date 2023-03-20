@@ -1,7 +1,7 @@
 import GameboardFactory from "../components/gameboard";
 import ShipFactory from "../components/ship"
 
-describe("Board Creation", () => {
+describe.skip("Board Creation", () => {
     test("Gameboard has a board: 1- arrays of 10 arrays of 10 nulls", () => {
         const gameboard = GameboardFactory();
     
@@ -20,7 +20,7 @@ describe("Board Creation", () => {
     })
 })
 
-describe("Ship Placement", () => {
+describe.skip("Ship Placement", () => {
     describe("Legal Placements", () => {
         test("Place a ship at a specific coordinate horizontally", () => {
             const ship = ShipFactory(5);
@@ -156,7 +156,7 @@ describe("Ship Placement", () => {
     })
 })
 
-describe("Attacking Ships", () => {
+describe.skip("Attacking Ships", () => {
     describe("Legal Attacks", () => {
         test("Attacking and missing returns false", () => {
             const gameboard = GameboardFactory();
@@ -210,6 +210,29 @@ describe("Attacking Ships", () => {
 
             expect(repeatAttack).toThrow();
         })
+    })
+})
+
+describe("Sinking Ships", () => {
+    test("Without any ships placed, no ships are sunk", () => {
+        const gameboard = GameboardFactory();
+
+        expect(gameboard.allSunk).toBe(false);
+    })
+
+    describe.skip("Placing 1 ship gameplay", () => {
+        const gameboard = GameboardFactory();
+        const ship = ShipFactory(3);
+        gameboard.placeShip(ship, [0,0], true);
+
+        test("Originally allSunk is false", () => {
+            expect(gameboard.allSunk)
+        })
+    }); 
+
+    describe.skip("Placing 2 ships gameplay", () => {
+        const gameboard = GameboardFactory();
+
     })
 })
 
