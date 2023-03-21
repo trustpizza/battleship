@@ -50,20 +50,16 @@ describe("Game Setup", () => {
 
             const shipLengths = [2,3,3,4,5];
 
-            for (let i = 0; i < shipLengths.length; i++) {
-                const ship = shipFactory(shipLengths[i]);
-            
+            for (let i = 0; i < shipLengths.length; i++) {            
                 for (const board of [p1Board, p2Board]) {
+                    const ship = ShipFactory(shipLengths[i]);
                     board.placeShip(ship, [i,0], true)
                 }                
             }
-
-            // For each player
-                // For shipsLenghts.length times
-                    // Build ships at shipLength[i]
-                    // Place ship somewhere
         })
 
-        test("P1 attacks P2")
+        
+
+        // test("P1 attacks P2")
     })
 })
