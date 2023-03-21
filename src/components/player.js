@@ -12,13 +12,13 @@ class MultipleBoardsError extends Error {
     }
 }
 
-export default function PlayerFactory(name) {
-    function validateAttack(boardBeingAttacked, playersBoard) {
-        if (boardBeingAttacked === playersBoard) {
-            throw new SelfAttackError("You cannot attack your own board");
-        };
+function validateAttack(boardBeingAttacked, playersBoard) {
+    if (boardBeingAttacked === playersBoard) {
+        throw new SelfAttackError("You cannot attack your own board");
     };
+};
 
+export default function PlayerFactory(name) {
     let setBoardExecuted = false;
 
     const player = {
