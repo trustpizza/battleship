@@ -26,10 +26,14 @@ describe("Game Setup", () => {
         const p2Board = GameboardFactory();
         p1.setBoard(p1Board);
         p2.setBoard(p2Board);
+        
+        test("Current player is player1", () => {
+            expect(game.currentPlayer).toBe(p1);
+        });
 
-
-        test("Current Player attacks!", () => {
-            
-        })
+        test("Current player switches to player2", () => {
+            game.takeTurn([0,0]);
+            expect(game.currentPlayer).toBe(p2);
+        });
     })
 })

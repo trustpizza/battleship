@@ -14,10 +14,6 @@ describe("Player Tests", () => {
     test("Player has a board", () => {
         expect(p1.board).toBe(p1Board);
     })
-
-    test("Player can take turn", () => {
-        expect(p1.takeTurn([0,0])).toEqual(expect.arrayContaining([0,0]));
-    });
     
     test("Player cannot have a second board added", () => {
         function secondBoard() {
