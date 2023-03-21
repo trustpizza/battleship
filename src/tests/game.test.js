@@ -35,10 +35,6 @@ describe("Game Setup", () => {
             game.playRound();
             expect(game.currentPlayer).toBe(p2);
         });
-
-        test.skip("Current player can hit a ship", () => {
-            expect(game.currentPlayer).toBe(p1);
-        })
     });
 
     describe("Attacking enemy boards", () => {
