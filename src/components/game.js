@@ -1,6 +1,13 @@
+class SelfAttackError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "SelfAttack";
+    }
+}
+
 export default function BattleshipFactory(p1, p2) {
     let currentPlayer = p1;
-    
+
     const game = {
         players: {p1, p2},
         currentPlayer,

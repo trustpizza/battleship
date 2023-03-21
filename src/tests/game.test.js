@@ -1,5 +1,6 @@
 import BattleshipFactory from "../components/game";
-import PlayerFactory from "../components/player"
+import PlayerFactory from "../components/player";
+import GameboardFactory from "../components/gameboard";
 
 describe("Game Setup", () => {
     const p1 = PlayerFactory();
@@ -21,7 +22,13 @@ describe("Game Setup", () => {
     })
 
     describe("Adding Boards to each Player", () => {
-        test("Adding board to player1", () => {
+        const p1Board = GameboardFactory(); 
+        const p2Board = GameboardFactory();
+        p1.setBoard(p1Board);
+        p2.setBoard(p2Board);
+
+
+        test("Current Player attacks!", () => {
             
         })
     })

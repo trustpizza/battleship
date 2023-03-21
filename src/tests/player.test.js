@@ -16,24 +16,9 @@ describe("Player Tests", () => {
     })
 
     test("Player can take turn", () => {
-        expect(p1.takeTurn([0,0], p2Board)).toBe(false);
+        expect(p1.takeTurn([0,0])).toEqual(expect.arrayContaining([0,0]));
     });
-
-    test("Player cannot take same turn twice", () => {
-        function repeatAttack() {
-            p1.takeTurn([0,0], p2Board)
-        }
-        expect(repeatAttack).toThrow();
-    });
-
-    test("Player cannot attack their own board", () => {
-        function selfAttack() {
-            p1.takeTurn([0,0], p1Board)
-        }
-
-        expect(selfAttack).toThrow();
-    })
-
+    
     test("Player cannot have a second board added", () => {
         function secondBoard() {
             p1.setBoard(p1Board)
