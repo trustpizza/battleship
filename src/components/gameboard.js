@@ -1,6 +1,6 @@
 class IllegalMove extends Error {
     constructor(message) {
-        super(message)
+        super(message);
         this.name = "IllegalMove";
     }
 }
