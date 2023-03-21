@@ -31,7 +31,7 @@ describe("Game Setup", () => {
             expect(game.currentPlayer).toBe(p1);
         });
 
-        test.skip("Current player switches to player2", () => {
+        test("Current player switches to player2", () => {
             game.takeTurn([0,0]);
             expect(game.currentPlayer).toBe(p2);
         });
@@ -58,8 +58,9 @@ describe("Game Setup", () => {
             }
         })
 
-        
-
+        test.skip("True is True", () => {
+            expect(true).toBe(true);
+        })
         // test("P1 attacks P2")
     })
 })
