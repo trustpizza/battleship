@@ -1,7 +1,7 @@
 import PlayerFactory from "../components/player";
 import GameboardFactory from "../components/gameboard"
 
-describe("Basic player stats", () => {
+describe("Player Tests", () => {
     const p1Board = GameboardFactory();
     const p2Board = GameboardFactory();
     const p1 = PlayerFactory("Axel");
