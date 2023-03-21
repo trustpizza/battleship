@@ -32,7 +32,7 @@ describe("Game Setup", () => {
         });
 
         test("Current player switches to player2", () => {
-            game.takeTurn([0,0]);
+            game.playRound();
             expect(game.currentPlayer).toBe(p2);
         });
 

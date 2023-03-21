@@ -10,13 +10,22 @@ export default function BattleshipFactory(p1, p2) {
 
     let gameover = false;
 
+    function switchPlayer(game) {
+        game.currentPlayer = (game.currentPlayer == p1 ? p2: p1);
+    }
+
     const game = {
         players: {p1, p2},
         currentPlayer,
-        switchPlayer () {
-            this.currentPlayer = (this.currentPlayer == p1 ? p2 : p1)
-        },
+        playRound (selection) {
+            switchPlayer(this)
+        }
     };
 
     return game;
 }
+
+
+//        switchPlayer () {
+//     this.currentPlayer = (this.currentPlayer == p1 ? p2 : p1)
+// },
