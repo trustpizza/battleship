@@ -1,16 +1,25 @@
-class SelfAttack extends Error {
+class SelfAttackError extends Error {
     constructor(message) {
         super(message);
         this.name = "SelfAttack";
     }
 }
 
+class MultipleBoardsError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "MultipleBoards"
+    }
+}
+
 export default function PlayerFactory(name) {
     function validateAttack(boardBeingAttacked, playersBoard) {
         if (boardBeingAttacked === playersBoard) {
-            throw new SelfAttack("You cannot attack your own board");
+            throw new SelfAttackError("You cannot attack your own board");
         }
     }
+
+    let setBoardExecuted = false;
 
     const player = {
         name,
@@ -19,7 +28,14 @@ export default function PlayerFactory(name) {
             return board.receiveAttack(coords);
         },
         setBoard (board) {
-            this.board = board;
+            (() => {
+                if (!setBoardExecuted) {
+                    setBoardExecuted = true;
+                    this.board = board;
+                } else {
+                    throw new MultipleBoardsError("You can only have one board");
+                }
+            })()
         }
     }
 

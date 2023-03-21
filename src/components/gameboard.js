@@ -1,11 +1,11 @@
-class IllegalMove extends Error {
+class IllegalMoveError extends Error {
     constructor(message) {
         super(message);
         this.name = "IllegalMove";
     }
 }
 
-class IllegalAttack extends Error {
+class IllegalAttackError extends Error {
     constructor(message) {
         super(message);
         this.name = "IllegalAttack";
@@ -34,11 +34,11 @@ function GameboardFactory() {
         // THe -1 found in both of these are due to the fact that when placing a ship we do not count the start point.  For example, if a ship is 2 units long and placed on square [8,8], it will take up [8,8] and [8,9], however if we only added the ship length to its starting position this would give 8+2=10, and would then throw. 
         if (horizontal) {
             if (coords[1] + ship.length - 1 > 9 || coords[1] < 0) {
-                throw new IllegalMove("Illegal Move: The ship must be entirely on the board")
+                throw new IllegalMoveError("Illegal Move: The ship must be entirely on the board")
             }
         } else if (!horizontal) {
             if (coords[0] < 0 || coords[0] + ship.length - 1 > 9 ) {
-                throw new IllegalMove(`Illegal Move: The ship must be entirely on the board`)
+                throw new IllegalMoveError(`Illegal Move: The ship must be entirely on the board`)
             }
         }
     }
@@ -60,7 +60,7 @@ function GameboardFactory() {
         for (let i = 0; i < futurePositions.length; i++) {
             const coords = futurePositions[i];
             if (board[coords[0]][coords[1]] !== null) { 
-                throw new IllegalMove("Illegal Move: Ship cannot overlap with another ship") 
+                throw new IllegalMoveError("Illegal Move: Ship cannot overlap with another ship") 
             }
         }
         // Check each of the futurePosition on the board, if they are not null, return error
