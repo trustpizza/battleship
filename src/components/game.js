@@ -25,7 +25,4 @@ export default function BattleshipFactory(p1, p2) {
     return game;
 }
 
-
-//        switchPlayer () {
-//     this.currentPlayer = (this.currentPlayer == p1 ? p2 : p1)
-// },
+// Game's sshould be able to play a game.  The play game function should 
