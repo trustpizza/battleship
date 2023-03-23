@@ -1,7 +1,8 @@
 export default function NewPlayerForm(player) {
     const fieldset = document.createElement("fieldset");
+    fieldset.name = "newPlayerForm"
     fieldset.className = 
-        "md:flex md:items-center mb-6"
+        "md:flex md:items-center mb-6";
 
     const nameFieldDiv = FormFieldCreator(player, "text", "Name");
 

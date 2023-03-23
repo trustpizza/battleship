@@ -11,8 +11,8 @@ Start from here
 const startForm = document.createElement("form");
 startForm.className = "w-full max-w-sm flex flex-col"
 
-const p1Fieldset = NewPlayerForm("Player 1");
-const p2Fieldset = NewPlayerForm("Player 2");
+const p1Fieldset = NewPlayerForm("Player 1", "p1");
+const p2Fieldset = NewPlayerForm("Player 2", "P2");
 
 const submitButton = document.createElement("input");
 submitButton.type = "submit";
@@ -23,7 +23,12 @@ submitButton.className =
 
 startForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const p1Fieldset = 1
+    const formData = new FormData(startForm);
+
+    const p1 = PlayerFactory(formData.get("Player 1"));
+    const p2 = PlayerFactory(formData.get("Player 2"));
+
+    console.log(p1, p2);
 })
 
 console.log(startForm)
