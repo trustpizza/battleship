@@ -1,7 +1,8 @@
 import './style.css';
-import startForm from './ui-components/start-page';
+import startPage from './ui-components/start-page';
+// Componenets
+// UI
 
 const content = document.getElementById("content");
 
-const form = startForm;
-content.append(form);
+content.append(startPage);

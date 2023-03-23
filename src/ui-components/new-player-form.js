@@ -1,4 +1,4 @@
-export default function NewPlayerForm(player) {
+function NewPlayerForm(player) {
     const fieldset = document.createElement("fieldset");
     fieldset.name = "newPlayerForm"
     fieldset.className = 
@@ -36,6 +36,7 @@ function FormFieldCreator(name, type, placeholder) {
 
     const formFieldInput = document.createElement('input');
     formFieldInput.name = name;
+    formFieldInput.required = true;
     formFieldInput.type = type;
     formFieldInput.placeholder = placeholder
     formFieldInput.className =
@@ -46,4 +47,20 @@ function FormFieldCreator(name, type, placeholder) {
     formFieldSection.append(labelDiv, inputDiv);
 
     return formFieldSection;
-}
+};
+
+const startForm = document.createElement("form");
+startForm.className = "w-full max-w-sm flex flex-col"
+
+const p1Fieldset = NewPlayerForm("Player 1", "p1");
+const p2Fieldset = NewPlayerForm("Player 2", "P2");
+
+const submitButton = document.createElement("input");
+submitButton.type = "submit";
+submitButton.value = "Submit";
+submitButton.textContent = "Start Game"; 
+submitButton.className = 
+    "shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+
+startForm.append(p1Fieldset, p2Fieldset, submitButton);
+export default startForm;
