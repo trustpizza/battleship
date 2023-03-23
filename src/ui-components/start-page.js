@@ -1,3 +1,4 @@
+import NewPlayerForm from "./new-player-form";
 /*
 Plan:
 Create a start-page.  The start page will have a form that requires validation to create 2 plays

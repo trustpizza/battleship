@@ -1,5 +1,5 @@
 export default function NewPlayerForm() {
-    const form = document.createElement("form");
+    const fieldset = document.createElement("fieldset");
 
     const nameFieldDiv = FormFieldCreator("name", "text");
 
@@ -7,9 +7,9 @@ export default function NewPlayerForm() {
     submitButton.type = "submit";
     submitButton.value = "submit";
 
-    form.appendChild(nameFieldDiv);
+    fieldset.appendChild(nameFieldDiv);
 
-    return form;
+    return fieldset;
 }
 
 function FormFieldCreator(name, type) {
