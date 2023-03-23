@@ -1,12 +1,21 @@
 import GameBoard from '../ui-components/gameboard';
 import ShipFactory from "../components/ship";
 import GameboardFactory from '../components/gameboard';
-import ShipSidebarFactory from '../ui-components/ships-sidebar';
+import ShipNavFactory from '../ui-components/ships-nav';
+
+const currentShip = {
+    set (ship) {
+        this.ship = ship;
+    },
+    get () {
+        return this.ship;
+    }
+};
 
 const PlayerBoardBuilder = (player) => {
     const container = document.createElement('div');
     container.className = 
-        "flex";
+        "flex flex-col gap-10";
 
     const boardUI = GameBoard();
 
@@ -18,12 +27,12 @@ const PlayerBoardBuilder = (player) => {
         ships.push(ship);
     }
 
-    const sidebar = ShipSidebarFactory(ships);
+    const nav = ShipNavFactory(ships).nav;
 
     const playerGameboard = GameboardFactory();
 
-    container.append(sidebar, boardUI);
+    container.append(boardUI, nav);
     return container;
 }
 
-export default PlayerBoardBuilder;
+export {PlayerBoardBuilder, currentShip};

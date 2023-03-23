@@ -1,9 +1,11 @@
 import startForm from './new-player-form';
 import PlayerFactory from "../components/player";
-import PlayerBoardBuilder from '../game-logic/place-ships-board';
+import {PlayerBoardBuilder} from '../game-logic/place-ships-board';
 // Eventually move this since there should be NO game logic here
 
 const startPage = document.createElement('div');
+startPage.className = 
+    "h-screen flex items-center justify-center"
 // startPage.appendChild(startForm);
 const p1 = PlayerFactory("Axel");
 const player1Board = PlayerBoardBuilder(p1);
