@@ -27,12 +27,7 @@ startForm.addEventListener("submit", (e) => {
 
     const p1 = PlayerFactory(formData.get("Player 1"));
     const p2 = PlayerFactory(formData.get("Player 2"));
-
-    console.log(p1, p2);
-})
-
-console.log(startForm)
-
+});
 
 startForm.append(p1Fieldset, p2Fieldset, submitButton);
 export default startForm;
