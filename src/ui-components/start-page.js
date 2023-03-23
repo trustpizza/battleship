@@ -8,13 +8,24 @@ Start from here
 */
 
 const startForm = document.createElement("form");
+startForm.className = "w-full max-w-sm flex flex-col"
 
-const p1Fieldset = NewPlayerForm();
-const p2Fieldset = NewPlayerForm();
+const p1Fieldset = NewPlayerForm("Player 1");
+const p2Fieldset = NewPlayerForm("Player 2");
 
-const submitButton = document.createElement("button");
+const submitButton = document.createElement("input");
 submitButton.type = "submit";
-submitButton.value = "submit";
+submitButton.value = "Submit";
+submitButton.textContent = "Start Game"; 
+submitButton.className = 
+    "shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+
+startForm.addEventListener("submit", (e) => {
+    e.preventDefault()
+})
+
+console.log(startForm)
+
 
 startForm.append(p1Fieldset, p2Fieldset, submitButton);
 export default startForm;
