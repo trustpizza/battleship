@@ -1,4 +1,5 @@
 import NewPlayerForm from "./new-player-form";
+import PlayerFactory from "../components/player";
 /*
 Plan:
 Create a start-page.  The start page will have a form that requires validation to create 2 plays
@@ -21,7 +22,8 @@ submitButton.className =
     "shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
 
 startForm.addEventListener("submit", (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    const p1Fieldset = 1
 })
 
 console.log(startForm)
