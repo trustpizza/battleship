@@ -30,7 +30,7 @@ function getCellLocation(cell) {
 function removeShips(ships) {
     const locationOfCurrentShip = ships.indexOf(currentShip.get());
     ships.splice(locationOfCurrentShip, 1);
-    console.log(ships);
+    // console.log(ships);
 }
 
 function placeShipsOnBoard(boardUI, gameboard, ships, nav) {
@@ -43,7 +43,7 @@ function placeShipsOnBoard(boardUI, gameboard, ships, nav) {
                     gameboard.placeShip(currentShip.get(), cellLocation, true);
                     removeShips(ships);
                     currentShip.reset();
-                    boardUI.updateUI();
+                    boardUI.updateUI(gameboard);
                     if (ships.length == 0) {
                         shipsEmpty = true;
                         return false;
@@ -86,4 +86,4 @@ const PlayerBoardBuilder = (player) => {
     return container;
 }
 
-export {PlayerBoardBuilder, currentShip};
+export {PlayerBoardBuilder, currentShip };

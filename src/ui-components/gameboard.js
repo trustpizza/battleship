@@ -1,5 +1,4 @@
 // This will be the ui representation of the gameboard
-
 export default function GameBoard() {
     function cellFactory(x,y) {
         const cell = document.createElement('div');
@@ -21,12 +20,36 @@ export default function GameBoard() {
             const cell = cellFactory(i,j);
             board.appendChild(cell)    
             cells.push(cell)
-        }
+        };
     };
+
+    const boardUI = {
+        board,
+        cells,
+        updateUI (gameboard) {
+            gameboard.board.forEach(row => {
+                row.forEach(cell => {
+                    if (cell) {
+                        const indices = []
+                        const rowCopy = Array.from(row);
+                        let idx = rowCopy.indexOf(cell);
+                        while (idx !== -1){
+                            indices.push([gameboard.board.indexOf(row), idx]);
+                            idx = rowCopy.indexOf(cell, idx + 1)
+                        }
+                        indices.forEach(index => {
+                            const target = this.board.querySelector(`[location='${index[0]},${index[1]}']`)
+                            target.classList.add("bg-gray-300", "hover:bg-gray-300")
+                        })
+                    }
+                })
+            })
+        }
+    }
 
     // Update function
 
-    return {board, cells};
+    return boardUI;
 }
 
 
