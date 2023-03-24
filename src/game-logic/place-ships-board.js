@@ -44,6 +44,7 @@ function placeShipsOnBoard(boardUI, gameboard, ships, nav) {
                     removeShips(ships);
                     currentShip.reset();
                     boardUI.updateUI(gameboard);
+                    nav.update(ships);
                     if (ships.length == 0) {
                         shipsEmpty = true;
                         return false;
@@ -71,8 +72,8 @@ const PlayerBoardBuilder = (player) => {
         ships.push(ship);
     };
 
-    const nav = ShipNavFactory(ships).nav;
-
+    const nav = ShipNavFactory(ships);
+    nav.update(ships)
     /*
     Plan:
         Set the current ship
@@ -82,7 +83,7 @@ const PlayerBoardBuilder = (player) => {
 
     placeShipsOnBoard(boardUI, playerGameboard, ships, nav);
 
-    container.append(boardUI.board, nav);
+    container.append(boardUI.board, nav.nav);
     return container;
 }
 

@@ -20,7 +20,15 @@ function updateNav(nav, ships) {
         shipButton.addEventListener('click', () => {
             currentShip.set(ship);
         })
-    }   
+    }
+    
+    if (ships.length === 0) {
+        const nextButton = document.createElement('button');
+        nextButton.className = 
+            "shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+        nextButton.textContent = "Next"
+        nav.appendChild(nextButton)
+    }
 }
 
 const ShipNavFactory = (ships) => {
@@ -28,13 +36,14 @@ const ShipNavFactory = (ships) => {
     nav.className =
         "flex w-full h-10 border-2 rounded-md justify-between";
     
-    const update = (ships) => {
-        updateNav(nav, ships);
+    const navbar = {
+        nav,
+        update (ships) {
+            updateNav(this.nav, ships)
+        }
     }
 
-    update(ships);
-
-    return {nav, update};
+    return navbar;
 };
 
 export default ShipNavFactory;
