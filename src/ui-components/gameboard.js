@@ -23,6 +23,16 @@ export default function GameBoard() {
         };
     };
 
+    function getLocationFromCell(cell) {
+        const loc = [];
+        const cellLocation = cell.getAttribute("location").split(",")
+        cellLocation.forEach(val => {
+            loc.push(parseInt(val))
+        })
+
+        return loc;
+    }
+
     function getRowsFromGameboard(gameboard) {
         const gameboardRows = [];
 
@@ -33,6 +43,7 @@ export default function GameBoard() {
 
         return gameboardRows;
     };
+    
 
     function getColsFromGameboard(gameboard) {
         const gameboardColumns = {};
@@ -47,7 +58,7 @@ export default function GameBoard() {
             gameboardColumns[i] = col;
         }
         return gameboardColumns;
-    }
+    };
 
     let Unique = (arr) => {
         let uniques = [];
@@ -67,11 +78,11 @@ export default function GameBoard() {
         }
 
         return uniques;
-    }
+    };
     
     function findCellsFromRow(gameboard) {
         const rows = getRowsFromGameboard(gameboard);
-        console.log(rows)
+
         const indicies = [];
         rows.forEach(row => {
             row.forEach(cell => {
@@ -91,44 +102,39 @@ export default function GameBoard() {
     const boardUI = {
         board,
         cells,
-        test (gameboard) {
-            console.log("columns", getColsFromGameboard(gameboard));
-            console.log("rows", getRowsFromGameboard(gameboard));
-        },
         updateUI (gameboard) {
-            console.log(findCellsFromRow(gameboard))
-            gameboard.board.forEach(row => {
-                row.forEach(cell => {
-                    if (cell) {
-                        const indices = []
-                        const rowCopy = Array.from(row);
-                        let idx = rowCopy.indexOf(cell);
-                        while (idx !== -1){
-                            indices.push([gameboard.board.indexOf(row), idx]);
-                            idx = rowCopy.indexOf(cell, idx + 1)
-                        }
-                        indices.forEach(index => {
-                            const target = this.board.querySelector(`[location='${index[0]},${index[1]}']`)
-                            target.classList.add("bg-gray-300", "hover:bg-gray-300")
-                        })
-                    }
-                })
-            })
+            const cellsWithShips = findCellsFromRow(gameboard);
+            console.log(cellsWithShips)
+            cellsWithShips.forEach(index => {
+                const target = this.board.querySelector(`[location='${index[0]},${index[1]}']`);
+                target.classList.add("bg-gray-300", "hover:bg-gray-300");
+            });
         },
-        showShipOnHover (gamebaord, ship, horizontal) {
+        showShipOnHover (ship, target, gameboard, horizontal) {
             if (horizontal) {
-                gameboard.board.forEach(row => {
-                    row.forEach(cell => {
-                        if (cell) {
-                            const indices = []
-                            const rowCopy = Array.from(row);
-                            let idx = rowCopy.indexOf(cell);
-                            while (idx !== -1) {
-                                
-                            }
-                        }
-                     })
+                const futureShipLocations = 1;
+                const rows = getRowsFromGameboard(gameboard);
+                const cells = [];
+                const cellLocation = getLocationFromCell(target);
+
+                for (let i = 0; i < ship.length; i++) {
+                    cells.push([cellLocation[0], cellLocation[1]+i])                   
+                };
+
+                cells.forEach(index => {
+                    const target = this.board.querySelector(`[location='${index[0]},${index[1]}']`);
+                    target.classList.add("bg-gray-300", "hover:bg-gray-300");
                 })
+            }
+        },
+        resetHover (gameboard) {
+            while (this.board.firstChild) {
+                this.board.removeChild(this.board.firstChild)
+            }
+            const allLocations = []
+            for (const cell of this.cells) {
+                const location = getLocationFromCell(cell);
+                console.log(location);
             }
         }
     }

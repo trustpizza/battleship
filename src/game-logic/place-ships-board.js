@@ -41,8 +41,8 @@ function placeShipsOnBoard(boardUI, gameboard, ships, nav) {
             if (e.target.parentElement == boardUI.board) {
                 const currentCell = e.target
                 if (currentShip.get()) {
-                    console.log(currentCell);
-
+                    boardUI.showShipOnHover(currentShip.get(), currentCell, gameboard, true);
+                    boardUI.resetHover()
                 }
                 boardUI.board.addEventListener('click', (e) => {
                     const cellLocation = getCellLocation(e.target);
@@ -52,7 +52,6 @@ function placeShipsOnBoard(boardUI, gameboard, ships, nav) {
                         removeShips(ships);
                         currentShip.reset();
                         boardUI.updateUI(gameboard);
-                        boardUI.test(gameboard)
                         nav.update(ships);
                         if (ships.length == 0) {
                             shipsEmpty = true;
