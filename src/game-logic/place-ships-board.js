@@ -52,6 +52,7 @@ function placeShipsOnBoard(boardUI, gameboard, ships, nav) {
                         removeShips(ships);
                         currentShip.reset();
                         boardUI.updateUI(gameboard);
+                        boardUI.test(gameboard)
                         nav.update(ships);
                         if (ships.length == 0) {
                             shipsEmpty = true;

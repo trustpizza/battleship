@@ -23,14 +23,56 @@ export default function GameBoard() {
         };
     };
 
+    function getRowsFromGameboard(gameboard) {
+        const gameboardRows = {};
+
+        for (let i = 0; i < gameboard.board.length; i++) {
+            const row = gameboard.board[i];
+            gameboardRows[i] = row;
+        }
+
+        return gameboardRows;
+    };
+
+    function getColsFromGameboard(gameboard) {
+        const gameboardColumns = {};
+
+        for (let i = 0; i < gameboard.board.length; i++) {
+            const row = gameboard.board[i];
+            const col = [];
+            for (let j = 0; j < row.length; j++) {
+                const element = col[j];
+                col.push(gameboard.board[j][i])
+            }
+            gameboardColumns[i] = col;
+        }
+        return gameboardColumns;
+    }
+
+    /*
+    I can use recursion to find all non-empty array values and return them.
+
+    function getRowsFromGameboard(gameboard) {
+        const rows = {}
+
+        for(let i = 0)
+    }
+
+    function findCellsFromRow(gameboard) {
+        
+    }
+
+    */
+
     function findCellsFromRow(gameboard) {
         console.log(gameboard.board)
         gameboard.board.forEach(row => {
             row.forEach(cell => {
                 const indices = []
+                const rowCopy = Array.from(row);
+                let idx = rowCopy.indexOf(cell);
                 if (cell) {
-                    const rowCopy = Array.from(row);
-                    let idx = rowCopy.indexOf(cell);
+
                     // while (idx !== -1){
                     //     indices.push([gameboard.board.indexOf(row), idx]);
                     //     idx = rowCopy.indexOf(cell, idx + 1)
@@ -49,6 +91,10 @@ export default function GameBoard() {
     const boardUI = {
         board,
         cells,
+        test (gameboard) {
+            console.log("columns", getColsFromGameboard(gameboard));
+            console.log("rows", getRowsFromGameboard(gameboard));
+        },
         updateUI (gameboard) {
             console.log(findCellsFromRow(gameboard))
             gameboard.board.forEach(row => {
