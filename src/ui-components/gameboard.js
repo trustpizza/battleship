@@ -24,7 +24,7 @@ export default function GameBoard() {
     };
 
     function getRowsFromGameboard(gameboard) {
-        const gameboardRows = {};
+        const gameboardRows = [];
 
         for (let i = 0; i < gameboard.board.length; i++) {
             const row = gameboard.board[i];
@@ -49,43 +49,43 @@ export default function GameBoard() {
         return gameboardColumns;
     }
 
-    /*
-    I can use recursion to find all non-empty array values and return them.
+    let Unique = (arr) => {
+        let uniques = [];
+    
+        let itemsFound = {};
+    
+        for(let val of arr) {
+            let stringified = JSON.stringify(val);
+    
+            if(itemsFound[stringified]) { 
+               continue; 
+            }
+    
+            uniques.push(val);
+    
+            itemsFound[stringified] = true;
+        }
 
-    function getRowsFromGameboard(gameboard) {
-        const rows = {}
-
-        for(let i = 0)
+        return uniques;
     }
-
+    
     function findCellsFromRow(gameboard) {
-        
-    }
-
-    */
-
-    function findCellsFromRow(gameboard) {
-        console.log(gameboard.board)
-        gameboard.board.forEach(row => {
+        const rows = getRowsFromGameboard(gameboard);
+        console.log(rows)
+        const indicies = [];
+        rows.forEach(row => {
             row.forEach(cell => {
-                const indices = []
-                const rowCopy = Array.from(row);
-                let idx = rowCopy.indexOf(cell);
+                let idx = row.indexOf(cell);
                 if (cell) {
-
-                    // while (idx !== -1){
-                    //     indices.push([gameboard.board.indexOf(row), idx]);
-                    //     idx = rowCopy.indexOf(cell, idx + 1)
-                    // }
-                    indices.push([gameboard.board.indexOf(row), idx]);
-                    idx = rowCopy.indexOf(cell, idx+1)
-                    // return indices[0];
-                    console.log(indices)
-
+                    while (idx !== -1) {
+                        indicies.push([gameboard.board.indexOf(row), idx]);
+                        idx = row.indexOf(cell, idx+1);
+                    }
                 }
-
-            })
+            });
         })
+
+        return Unique(indicies);
     }
 
     const boardUI = {
