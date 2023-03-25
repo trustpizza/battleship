@@ -118,7 +118,11 @@ export default function GameBoard() {
                 const cellLocation = getLocationFromCell(target);
 
                 for (let i = 0; i < ship.length; i++) {
-                    cells.push([cellLocation[0], cellLocation[1]+i])                   
+                    if ((cellLocation[1] + ship.length - 1) > 9) {
+                        break;
+                    } else {
+                        cells.push([cellLocation[0], cellLocation[1]+i])                   
+                    }
                 };
 
                 cells.forEach(index => {
@@ -128,14 +132,14 @@ export default function GameBoard() {
             }
         },
         resetHover (gameboard) {
-            while (this.board.firstChild) {
-                this.board.removeChild(this.board.firstChild)
-            }
-            const allLocations = []
-            for (const cell of this.cells) {
-                const location = getLocationFromCell(cell);
-                console.log(location);
-            }
+            // while (this.board.firstChild) {
+            //     this.board.removeChild(this.board.firstChild)
+            // }
+            // const allLocations = []
+            // for (const cell of this.cells) {
+            //     const location = getLocationFromCell(cell);
+            //     console.log(location);
+            // }
         }
     }
 
