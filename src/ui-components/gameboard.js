@@ -23,10 +23,34 @@ export default function GameBoard() {
         };
     };
 
+    function findCellsFromRow(gameboard) {
+        console.log(gameboard.board)
+        gameboard.board.forEach(row => {
+            row.forEach(cell => {
+                const indices = []
+                if (cell) {
+                    const rowCopy = Array.from(row);
+                    let idx = rowCopy.indexOf(cell);
+                    // while (idx !== -1){
+                    //     indices.push([gameboard.board.indexOf(row), idx]);
+                    //     idx = rowCopy.indexOf(cell, idx + 1)
+                    // }
+                    indices.push([gameboard.board.indexOf(row), idx]);
+                    idx = rowCopy.indexOf(cell, idx+1)
+                    // return indices[0];
+                    console.log(indices)
+
+                }
+
+            })
+        })
+    }
+
     const boardUI = {
         board,
         cells,
         updateUI (gameboard) {
+            console.log(findCellsFromRow(gameboard))
             gameboard.board.forEach(row => {
                 row.forEach(cell => {
                     if (cell) {
@@ -44,6 +68,22 @@ export default function GameBoard() {
                     }
                 })
             })
+        },
+        showShipOnHover (gamebaord, ship, horizontal) {
+            if (horizontal) {
+                gameboard.board.forEach(row => {
+                    row.forEach(cell => {
+                        if (cell) {
+                            const indices = []
+                            const rowCopy = Array.from(row);
+                            let idx = rowCopy.indexOf(cell);
+                            while (idx !== -1) {
+                                
+                            }
+                        }
+                     })
+                })
+            }
         }
     }
 

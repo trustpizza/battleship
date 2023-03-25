@@ -35,25 +35,34 @@ function removeShips(ships) {
 
 function placeShipsOnBoard(boardUI, gameboard, ships, nav) {
     let shipsEmpty = true;
+    let horizontal = true;
     do {
-        boardUI.board.addEventListener('click', (e) => {
+        boardUI.board.addEventListener("mouseover", (e) => {
             if (e.target.parentElement == boardUI.board) {
-                const cellLocation = getCellLocation(e.target);
+                const currentCell = e.target
                 if (currentShip.get()) {
-                    gameboard.placeShip(currentShip.get(), cellLocation, true);
-                    removeShips(ships);
-                    currentShip.reset();
-                    boardUI.updateUI(gameboard);
-                    nav.update(ships);
-                    if (ships.length == 0) {
-                        shipsEmpty = true;
-                        return false;
-                    }
-                    // Remove current ship button
+                    console.log(currentCell);
+
                 }
+                boardUI.board.addEventListener('click', (e) => {
+                    const cellLocation = getCellLocation(e.target);
+
+                    if (currentShip.get()) {
+                        gameboard.placeShip(currentShip.get(), cellLocation, true);
+                        removeShips(ships);
+                        currentShip.reset();
+                        boardUI.updateUI(gameboard);
+                        nav.update(ships);
+                        if (ships.length == 0) {
+                            shipsEmpty = true;
+                            return false;
+                        }
+                        // Remove current ship button
+                    }
+                })
             }
-        })
-    } while (!shipsEmpty)
+        })     
+    } while (!ships.length)
 };
 
 const PlayerBoardBuilder = (player) => {
