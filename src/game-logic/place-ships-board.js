@@ -29,51 +29,97 @@ function getCellLocation(cell) {
 function removeShips(ships) {
     const locationOfCurrentShip = ships.indexOf(currentShip.get());
     ships.splice(locationOfCurrentShip, 1);
+};
+
+async function buildingShipsOnBoard(boardUI, gameboard, ships, nav, player) {
+    let horizontal = true;
+    do {
+        boardUI.board.addEventListener("mouseover", (e) => {
+            if (e.target.parentElement == boardUI.board) {
+                const currentCell = e.target
+                if (currentShip.get()) {
+                    boardUI.showShipOnHover(currentShip.get(), currentCell, gameboard, horizontal);
+                }
+                boardUI.board.addEventListener('click', (e) => {
+                    const cellLocation = getCellLocation(e.target);
+                    
+                    if (currentShip.get()) {
+                        try {
+                            gameboard.placeShip(currentShip.get(), cellLocation, horizontal);
+                            removeShips(ships);
+                            currentShip.reset();
+                            boardUI.updateUI(gameboard);
+                            nav.update(ships);
+
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    } else if (ships.length === 0) {
+                        try {
+                            return gameboard;
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }
+                })
+            }
+            boardUI.updateUI(gameboard)
+        })
+
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "r") {
+                horizontal = (horizontal === true ? false : true);
+            }
+        })
+    } while (!ships.length);
+    return gameboard;
 }
 
 function placeShipsOnBoard(boardUI, gameboard, ships, nav, player) {
-    let shipsEmpty = true;
     let horizontal = true;
-
-    boardUI.board.addEventListener("mouseover", (e) => {
-        if (e.target.parentElement == boardUI.board) {
-            const currentCell = e.target
-            if (currentShip.get()) {
-                boardUI.showShipOnHover(currentShip.get(), currentCell, gameboard, horizontal);
-            }
-            boardUI.board.addEventListener('click', (e) => {
-                const cellLocation = getCellLocation(e.target);
-                
+    do {
+        boardUI.board.addEventListener("mouseover", (e) => {
+            if (e.target.parentElement == boardUI.board) {
+                const currentCell = e.target
                 if (currentShip.get()) {
-                    try {
-                        gameboard.placeShip(currentShip.get(), cellLocation, horizontal);
-                        removeShips(ships);
-                        currentShip.reset();
-                        boardUI.updateUI(gameboard);
-                        nav.update(ships);
-
-                    } catch (error) {
-                        console.error(error);
-                    }
-                } else if (ships.length === 0) {
-                    shipsEmpty = true;
-                    // try {
-                    //     player.setBoard(gameboard);
-                    // } catch (error) {
-                    //     console.error(error);
-                    // }
-                    return true;
+                    boardUI.showShipOnHover(currentShip.get(), currentCell, gameboard, horizontal);
                 }
-            })
-        }
-        boardUI.updateUI(gameboard)
-    })
+                boardUI.board.addEventListener('click', (e) => {
+                    const cellLocation = getCellLocation(e.target);
+                    
+                    if (currentShip.get()) {
+                        try {
+                            gameboard.placeShip(currentShip.get(), cellLocation, horizontal);
+                            removeShips(ships);
+                            currentShip.reset();
+                            boardUI.updateUI(gameboard);
+                            nav.update(ships);
 
-    window.addEventListener("keydown", (e) => {
-        if (e.key === "r") {
-            horizontal = (horizontal === true ? false : true);
-        }
-    })
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    } else if (ships.length === 0) {
+                        try {
+                            return gameboard;
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }
+                })
+            }
+            boardUI.updateUI(gameboard)
+        })
+
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "r") {
+                horizontal = (horizontal === true ? false : true);
+            }
+        })
+    } while (!ships.length);
+
+    if (ships.length === 0) {
+        return gameboard;
+    }
 };
 
 const PlayerBoardBuilder = (player) => {
@@ -95,13 +141,7 @@ const PlayerBoardBuilder = (player) => {
     const nav = ShipNavFactory(ships);
     nav.update(ships)
 
-
-    let boardBuilt = false;
-
-    // do {
-        placeShipsOnBoard(boardUI, playerGameboard, ships, nav);
-        
-    // } while (!boardBuilt);
+    const board = placeShipsOnBoard(boardUI, playerGameboard, ships, nav, player);
 
     container.append(boardUI.board, nav.nav);
     return container;
