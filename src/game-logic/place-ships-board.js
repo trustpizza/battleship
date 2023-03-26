@@ -43,16 +43,20 @@ function placeShipsOnBoard(boardUI, gameboard, ships, nav) {
                 }
                 boardUI.board.addEventListener('click', (e) => {
                     const cellLocation = getCellLocation(e.target);
-
+                    
                     if (currentShip.get()) {
-                        gameboard.placeShip(currentShip.get(), cellLocation, horizontal);
-                        removeShips(ships);
-                        currentShip.reset();
-                        boardUI.updateUI(gameboard);
-                        nav.update(ships);
-                        if (ships.length == 0) {
-                            shipsEmpty = true;
-                            return false;
+                        try {
+                            gameboard.placeShip(currentShip.get(), cellLocation, horizontal);
+                            removeShips(ships);
+                            currentShip.reset();
+                            boardUI.updateUI(gameboard);
+                            nav.update(ships);
+                            if (ships.length == 0) {
+                                shipsEmpty = true;
+                                return false;
+                            }
+                        } catch (error) {
+                            return error;
                         }
                     }
                 })
@@ -63,7 +67,6 @@ function placeShipsOnBoard(boardUI, gameboard, ships, nav) {
         window.addEventListener("keydown", (e) => {
             if (e.key === "r") {
                 horizontal = (horizontal === true ? false : true);
-                console.log(horizontal)
             }
         })
     } while (!ships.length)
