@@ -36,6 +36,9 @@ export default function PlayerFactory(name) {
                     throw new MultipleBoardsError("You can only have one board");
                 }
             })()
+        },
+        hasBoard:  () => {
+            return setBoardExecuted;
         }
     }
 
