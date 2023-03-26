@@ -15,13 +15,17 @@ export default function GameBoard() {
 
     const cells = []
 
-    for (let i = 0; i < 10; i++) {
-        for (let j = 0; j < 10; j++) {
-            const cell = cellFactory(i,j);
-            board.appendChild(cell)    
-            cells.push(cell)
+    function buildBoard(board) {
+        for (let i = 0; i < 10; i++) {
+            for (let j = 0; j < 10; j++) {
+                const cell = cellFactory(i,j);
+                board.appendChild(cell)    
+                cells.push(cell)
+            };
         };
     };
+
+    buildBoard(board);
 
     function getLocationFromCell(cell) {
         const loc = [];
@@ -43,7 +47,6 @@ export default function GameBoard() {
 
         return gameboardRows;
     };
-    
 
     function getColsFromGameboard(gameboard) {
         const gameboardColumns = {};
@@ -112,7 +115,7 @@ export default function GameBoard() {
         },
         showShipOnHover (ship, target, gameboard, horizontal) {
             if (horizontal) {
-                const futureShipLocations = 1;
+                // const futureShipLocations = 1;
                 const rows = getRowsFromGameboard(gameboard);
                 const cells = [];
                 const cellLocation = getLocationFromCell(target);
@@ -128,18 +131,14 @@ export default function GameBoard() {
                 cells.forEach(index => {
                     const target = this.board.querySelector(`[location='${index[0]},${index[1]}']`);
                     target.classList.add("bg-gray-300", "hover:bg-gray-300");
+                });
+                target.addEventListener("mouseout", () => {
+                    cells.forEach(cell => {
+                        const target = this.board.querySelector(`[location='${cell[0]},${cell[1]}']`);
+                        target.classList.remove("bg-gray-300", "hover:bg-gray-300");
+                    })
                 })
             }
-        },
-        resetHover (gameboard) {
-            // while (this.board.firstChild) {
-            //     this.board.removeChild(this.board.firstChild)
-            // }
-            // const allLocations = []
-            // for (const cell of this.cells) {
-            //     const location = getLocationFromCell(cell);
-            //     console.log(location);
-            // }
         }
     }
 

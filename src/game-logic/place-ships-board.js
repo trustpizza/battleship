@@ -42,7 +42,7 @@ function placeShipsOnBoard(boardUI, gameboard, ships, nav) {
                 const currentCell = e.target
                 if (currentShip.get()) {
                     boardUI.showShipOnHover(currentShip.get(), currentCell, gameboard, true);
-                    boardUI.resetHover()
+                    // boardUI.resetHover()
                 }
                 boardUI.board.addEventListener('click', (e) => {
                     const cellLocation = getCellLocation(e.target);
@@ -61,7 +61,7 @@ function placeShipsOnBoard(boardUI, gameboard, ships, nav) {
                     }
                 })
             }
-        })     
+        }) 
     } while (!ships.length)
 };
 
