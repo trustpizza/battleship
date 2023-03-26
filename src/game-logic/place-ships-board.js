@@ -23,14 +23,12 @@ function getCellLocation(cell) {
     for (let i = 0; i < cellLocationAsArray.length; i++) {
         location.push(parseInt(cellLocationAsArray[i]))                
     }
-    // console.log(location)
     return location;
 }
 
 function removeShips(ships) {
     const locationOfCurrentShip = ships.indexOf(currentShip.get());
     ships.splice(locationOfCurrentShip, 1);
-    // console.log(ships);
 }
 
 function placeShipsOnBoard(boardUI, gameboard, ships, nav) {
@@ -41,14 +39,13 @@ function placeShipsOnBoard(boardUI, gameboard, ships, nav) {
             if (e.target.parentElement == boardUI.board) {
                 const currentCell = e.target
                 if (currentShip.get()) {
-                    boardUI.showShipOnHover(currentShip.get(), currentCell, gameboard, true);
-                    // boardUI.resetHover()
+                    boardUI.showShipOnHover(currentShip.get(), currentCell, gameboard, horizontal);
                 }
                 boardUI.board.addEventListener('click', (e) => {
                     const cellLocation = getCellLocation(e.target);
 
                     if (currentShip.get()) {
-                        gameboard.placeShip(currentShip.get(), cellLocation, true);
+                        gameboard.placeShip(currentShip.get(), cellLocation, horizontal);
                         removeShips(ships);
                         currentShip.reset();
                         boardUI.updateUI(gameboard);
@@ -57,11 +54,18 @@ function placeShipsOnBoard(boardUI, gameboard, ships, nav) {
                             shipsEmpty = true;
                             return false;
                         }
-                        // Remove current ship button
                     }
                 })
             }
-        }) 
+            boardUI.updateUI(gameboard)
+        })
+
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "r") {
+                horizontal = (horizontal === true ? false : true);
+                console.log(horizontal)
+            }
+        })
     } while (!ships.length)
 };
 
@@ -83,12 +87,6 @@ const PlayerBoardBuilder = (player) => {
 
     const nav = ShipNavFactory(ships);
     nav.update(ships)
-    /*
-    Plan:
-        Set the current ship
-        Once current ship is set, check if the player is clicking on the gameboard
-        If the player is clicking on the gameboard, get the location of 
-    */
 
     placeShipsOnBoard(boardUI, playerGameboard, ships, nav);
 

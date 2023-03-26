@@ -107,19 +107,16 @@ export default function GameBoard() {
         cells,
         updateUI (gameboard) {
             const cellsWithShips = findCellsFromRow(gameboard);
-            console.log(cellsWithShips)
             cellsWithShips.forEach(index => {
                 const target = this.board.querySelector(`[location='${index[0]},${index[1]}']`);
                 target.classList.add("bg-gray-300", "hover:bg-gray-300");
             });
         },
         showShipOnHover (ship, target, gameboard, horizontal) {
-            if (horizontal) {
-                // const futureShipLocations = 1;
-                const rows = getRowsFromGameboard(gameboard);
-                const cells = [];
-                const cellLocation = getLocationFromCell(target);
+            const cells = [];
+            const cellLocation = getLocationFromCell(target);
 
+            if (horizontal) {
                 for (let i = 0; i < ship.length; i++) {
                     if ((cellLocation[1] + ship.length - 1) > 9) {
                         break;
@@ -132,17 +129,31 @@ export default function GameBoard() {
                     const target = this.board.querySelector(`[location='${index[0]},${index[1]}']`);
                     target.classList.add("bg-gray-300", "hover:bg-gray-300");
                 });
-                target.addEventListener("mouseout", () => {
-                    cells.forEach(cell => {
-                        const target = this.board.querySelector(`[location='${cell[0]},${cell[1]}']`);
-                        target.classList.remove("bg-gray-300", "hover:bg-gray-300");
-                    })
+
+            } else {
+                for (let i = 0; i < ship.length; i++) {
+                    if ((cellLocation[0] + ship.length -1) > 9) {
+                        break;
+                    } else {
+                        cells.push([cellLocation[0] + i, cellLocation[1]])
+                    }
+
+                }
+
+                cells.forEach(index => {
+                    const target = this.board.querySelector(`[location='${index[0]},${index[1]}']`);
+                    target.classList.add("bg-gray-300", "hover:bg-gray-300");
                 })
             }
+
+            target.addEventListener("mouseout", () => {
+                cells.forEach(cell => {
+                    const target = this.board.querySelector(`[location='${cell[0]},${cell[1]}']`);
+                    target.classList.remove("bg-gray-300", "hover:bg-gray-300");
+                })
+            })
         }
     }
-
-    // Update function
 
     return boardUI;
 }
