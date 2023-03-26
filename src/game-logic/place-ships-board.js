@@ -31,7 +31,7 @@ function removeShips(ships) {
     ships.splice(locationOfCurrentShip, 1);
 }
 
-function placeShipsOnBoard(boardUI, gameboard, ships, nav) {
+function placeShipsOnBoard(boardUI, gameboard, ships, nav, player) {
     let shipsEmpty = true;
     let horizontal = true;
     do {
@@ -51,12 +51,16 @@ function placeShipsOnBoard(boardUI, gameboard, ships, nav) {
                             currentShip.reset();
                             boardUI.updateUI(gameboard);
                             nav.update(ships);
-                            if (ships.length == 0) {
-                                shipsEmpty = true;
-                                return false;
-                            }
+
                         } catch (error) {
-                            return error;
+                            console.error(error);
+                        }
+                    } else if (ships.length === 0) {
+                        shipsEmpty = true;
+                        try {
+                            player.setBoard(gameboard);
+                        } catch (error) {
+                            console.error(error);
                         }
                     }
                 })
@@ -91,7 +95,8 @@ const PlayerBoardBuilder = (player) => {
     const nav = ShipNavFactory(ships);
     nav.update(ships)
 
-    placeShipsOnBoard(boardUI, playerGameboard, ships, nav);
+         
+    placeShipsOnBoard(boardUI, playerGameboard, ships, nav, player);
 
     container.append(boardUI.board, nav.nav);
     return container;
