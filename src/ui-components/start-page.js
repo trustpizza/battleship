@@ -6,10 +6,10 @@ import {PlayerBoardBuilder} from '../game-logic/place-ships-board';
 const startPage = document.createElement('div');
 startPage.className = 
     "h-screen flex items-center justify-center"
-// startPage.appendChild(startForm);
-const p1 = PlayerFactory("Axel");
-const player1Board = PlayerBoardBuilder(p1);
-startPage.append(player1Board);
+startPage.appendChild(startForm);
+// const p1 = PlayerFactory("Axel");
+// const player1Board = PlayerBoardBuilder(p1);
+// startPage.append(player1Board);
 
 startForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -20,6 +20,8 @@ startForm.addEventListener("submit", (e) => {
     // Load Page
     startPage.removeChild(startForm);
     const player1Board = PlayerBoardBuilder(p1);
+    // ONce player 1 board is built, THEN build player 2 board...but how
+    // const player2Board = PlayerBoardBuilder(p2);
     startPage.append(player1Board)
 });
 
