@@ -114,7 +114,7 @@ function placeShipsOnBoard(boardUI, gameboard, ships, nav, player) {
         })
 
         window.addEventListener("keydown", (e) => { if (e.key === "r") { horizontal = (horizontal === true ? false : true); }})
-    } while (!player.hasBoard);
+    } while (!player.hasBoard());
 };
 
 const PlayerBoardBuilder = (player) => {

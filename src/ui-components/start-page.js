@@ -20,8 +20,12 @@ startForm.addEventListener("submit", (e) => {
     // Load Page
     startPage.removeChild(startForm);
     const player1Board = PlayerBoardBuilder(p1);
+
+    // do {
+    // } while (!p1.hasBoard());
+    const player2Board = PlayerBoardBuilder(p2);
+
     // ONce player 1 board is built, THEN build player 2 board...but how
-    // const player2Board = PlayerBoardBuilder(p2);
     startPage.append(player1Board)
 });
 
