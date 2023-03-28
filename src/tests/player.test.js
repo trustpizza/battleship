@@ -34,6 +34,10 @@ describe("Player Tests", () => {
         expect(selfAttack).toThrow();
     })
 
+    test("Player returns boolean on hasBoard", () => {
+        expect(p1.hasBoard()).toBe(true);
+    })
+
     test("Player cannot have a second board added", () => {
         function secondBoard() {
             p1.setBoard(p1Board)
