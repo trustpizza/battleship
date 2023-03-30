@@ -63,13 +63,13 @@ export default function GameBoard() {
         return gameboardColumns;
     };
 
-    let Unique = (arr) => {
-        let uniques = [];
+    const Unique = (arr) => {
+        const uniques = [];
     
-        let itemsFound = {};
+        const itemsFound = {};
     
-        for(let val of arr) {
-            let stringified = JSON.stringify(val);
+        for(const val of arr) {
+            const stringified = JSON.stringify(val);
     
             if(itemsFound[stringified]) { 
                continue; 

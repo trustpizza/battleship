@@ -29,7 +29,7 @@ describe("Player Tests", () => {
     test("Player cannot attack their own board", () => {
         function selfAttack() {
             p1.takeTurn([0,0], p1Board)
-        }
+        };
 
         expect(selfAttack).toThrow();
     })
@@ -42,7 +42,6 @@ describe("Player Tests", () => {
         function secondBoard() {
             p1.setBoard(p1Board)
         };
-
         expect(secondBoard).toThrow();
     })
 })
